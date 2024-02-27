@@ -2,7 +2,10 @@ const puppeteer = require('puppeteer');
 const express = require('express');
 const cors = require('cors');
 
-const url = 'https://www.imdb.com';
+const homeURL = 'https://www.imdb.com';
+const trendingSelector = {title:'.top-ten > div > div > div > div > .ipc-poster-card > .ipc-poster-card__title > span', image:'.top-ten > div > div > div > div > .ipc-poster-card > .ipc-poster > .ipc-media > .ipc-image'} 
+const favoriteSelector = {title:'.fan-picks > div > div > div > div > .ipc-poster-card > .ipc-poster-card__title > span', image:''}
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -16,7 +19,7 @@ async function startBrowser() {
   let browser;
   try {
     browser = await puppeteer.launch({
-      headless: false
+      headless: false 
     });
   } catch (err) {
     console.log("Could not create a browser instance => : ", err);
@@ -40,17 +43,30 @@ async function scrape(data) {
       height: 1920,
       deviceScaleFactor: 1,
     });
-    await page.goto(url);
-    await page.waitForSelector('.ipc-poster-card__title', {
-      visible: true,
-    })
-    //const title = await page.$$eval('ipc-poster-card__title > span', el => el.map(e => e.innerText));
-    const titles = await page.$$eval('.top-ten > div > div > div > div > .ipc-poster-card > .ipc-poster-card__title > span', el => el.map( e => e.textContent.slice(e.textContent.indexOf(' ')+1)));
-    const images = await page.$$eval('.top-ten > div > div > div > div > .ipc-poster-card > .ipc-poster > .ipc-media > .ipc-image', el => el.map( e => e.src ));
-    let returnData = []
-    for ( i in titles)
-      returnData.push({id: i,title: titles[i], image: images[i]});
-    page.close();
+    let returnData = {
+      trending: [],
+      favorites: []
+    };
+    switch (data) {
+      case "home":
+        await page.goto(homeURL);
+        await page.waitForSelector(trendingSelector.title , {
+          visible: true,
+        })
+        const tTitles = await page.$$eval(trendingSelector.title , el => el.map( e => e.textContent.slice(e.textContent.indexOf(' ')+1)));
+        const tImages = await page.$$eval(trendingSelector.image , el => el.map( e => e.src ));
+        const fTitles = await page.$$eval(favoriteSelector.title , el => el.map( e => e.textContent.slice(e.textContent)));
+        const fImages = await page.$$eval('.fan-picks > div > div > div > div > .ipc-poster-card > .ipc-poster > .ipc-media > .ipc-image', el => el.map( e => e.src));
+        for ( i in tTitles)
+          returnData.trending.push({id: i,title: tTitles[i], image: tImages[i]});
+        for ( i in fTitles)
+          returnData.favorites.push({id: i,title: fTitles[i], image: fImages[i]});
+        page.close();
+        break;
+
+      default:
+        break;
+    }
     return returnData; 
   } catch(err) {
     console.log("Could not resolve the browser instance => ", err);
