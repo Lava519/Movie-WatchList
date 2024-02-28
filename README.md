@@ -1,8 +1,11 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+1. Open terminal and type following commands:\
+    `git clone https://github.com/Lava519/Movie-WatchList.git`\
+    `cd Movie-WatchList`\
+    `npm install`\
+    `cd scraper`\
+    `npm install`
+3. From `scraper` directory run `npm run start`.
+4. From `Movie-WatchList` directory run `npm run dev`.
+5. Go to `http://localhost:5173/` to preview site.
+  
