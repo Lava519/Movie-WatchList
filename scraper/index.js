@@ -4,7 +4,10 @@ const cors = require('cors');
 
 const homeURL = 'https://www.imdb.com';
 const trendingSelector = {title:'.top-ten > div > div > div > div > .ipc-poster-card > .ipc-poster-card__title > span', image:'.top-ten > div > div > div > div > .ipc-poster-card > .ipc-poster > .ipc-media > .ipc-image'} 
-const favoriteSelector = {title:'.fan-picks > div > div > div > div > .ipc-poster-card > .ipc-poster-card__title > span', image:''}
+const favoriteSelector = {title:'.fan-picks > div > div > div > div > .ipc-poster-card > .ipc-poster-card__title > span', image:'.fan-picks > div > div > div > div > .ipc-poster-card > .ipc-poster > .ipc-media > .ipc-image'}
+
+const moviesURL = 'https://www.imdb.com/chart/top/';
+const moviesSelector = {title:'.ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > div > .ipc-title > .ipc-title-link-wrapper > h3', image: '.ipc-metadata-list > .ipc-metadata-list-summary-item > div > .ipc-poster > .ipc-media > .ipc-image'};
 
 const app = express();
 app.use(express.json());
@@ -43,27 +46,41 @@ async function scrape(data) {
       height: 1920,
       deviceScaleFactor: 1,
     });
-    let returnData = {
-      trending: [],
-      favorites: []
-    };
+    let returnData = {};
+    //WILL RETURN WRONG DATA IF CHANGED FREQUENTLY!!!!
     switch (data) {
       case "home":
+        returnData = {
+          trending: [],
+          favorites: []
+        };
         await page.goto(homeURL);
         await page.waitForSelector(trendingSelector.title , {
           visible: true,
         })
         const tTitles = await page.$$eval(trendingSelector.title , el => el.map( e => e.textContent.slice(e.textContent.indexOf(' ')+1)));
         const tImages = await page.$$eval(trendingSelector.image , el => el.map( e => e.src ));
-        const fTitles = await page.$$eval(favoriteSelector.title , el => el.map( e => e.textContent.slice(e.textContent)));
-        const fImages = await page.$$eval('.fan-picks > div > div > div > div > .ipc-poster-card > .ipc-poster > .ipc-media > .ipc-image', el => el.map( e => e.src));
+        const fTitles = await page.$$eval(favoriteSelector.title , el => el.map( e => e.textContent));
+        const fImages = await page.$$eval(favoriteSelector.image , el => el.map( e => e.src));
         for ( i in tTitles)
           returnData.trending.push({id: i,title: tTitles[i], image: tImages[i]});
         for ( i in fTitles)
           returnData.favorites.push({id: i,title: fTitles[i], image: fImages[i]});
         page.close();
         break;
-
+      case "movies":
+        returnData = {
+          movies: []
+        }
+        await page.goto(moviesURL);
+        await page.waitForSelector( moviesSelector.image, {
+          visible: true,
+        });
+        const mTitles = await page.$$eval(moviesSelector.title , el => el.map( e => e.textContent ))
+        const mImages = await page.$$eval(moviesSelector.image , el => el.map( e => e.src ));
+        for ( i in mImages)
+          returnData.movies.push({id: i, title: mTitles[i], image: mImages[i]});
+        page.close();
       default:
         break;
     }
