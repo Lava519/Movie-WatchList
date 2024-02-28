@@ -34,7 +34,9 @@ function App() {
   return (
     <>
       <Nav action={navClick}></Nav>
-      {!isScraping && <Home data={scrapeData} ></Home>}
+      <div className="non-nav">
+        {!isScraping && <Home data={scrapeData} ></Home>}
+      </div>
     </>
   )
 }

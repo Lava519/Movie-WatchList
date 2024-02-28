@@ -1,0 +1,35 @@
+.nav {
+  height: 100%;
+  width: 80px;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  list-style-type: none;
+  padding-left: 0;
+  background-color: #001b2e;
+}
+
+.nav > li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav > li > img {
+  width: 100%;
+  padding: 1.2em;
+}
+
+.nav > li:first-child {
+  padding-top: 2em;
+}
+
+.nav > li:last-child {
+  padding-bottom: 2em;
+}
+
+#home,#movies,#tv-shows,#bookmarks {
+  cursor: pointer;
+  filter: grayscale(100%) contrast(0%) brightness(0%) invert(100%);
+}

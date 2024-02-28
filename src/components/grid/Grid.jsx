@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
+import "./Grid.css";
 
 export default function Grid({ items }) {
   return (
-    <div>
+    <div className="grid">
       {items && items.map( (item) => {
         return (
-          <div key={item.id}>
+          <div className="grid-item" key={item.id}>
             <img src={item.image}/>
             <p>{item.title}</p>
           </div>
