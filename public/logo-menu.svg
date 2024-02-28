@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46667"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   sodipodi:docname="logo-menu.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.66069171"
+     inkscape:cx="6.8110435"
+     inkscape:cy="239.14331"
+     inkscape:window-width="1920"
+     inkscape:window-height="1020"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1"
+     showguides="true" />
+  <defs
+     id="defs1" />
+  <path
+     id="path116"
+     style="display:inline;fill:#001b2e;fill-opacity:1;stroke-width:1;stroke-linejoin:round;paint-order:stroke fill markers"
+     d="M 37.248372 0 L 45.655094 18.498096 L 47.697347 22.991878 L 62.90107 22.991878 L 60.858301 18.498096 L 52.451579 0 L 46.649866 0 L 37.248372 0 z M 67.655302 0 L 76.062024 18.498096 L 78.104277 22.991878 L 93.308 22.991878 L 91.26523 18.498096 L 82.858508 0 L 78.691838 0 L 67.655302 0 z M 98.062231 0 L 106.46844 18.498096 L 108.51121 22.991878 L 117.15047 22.991878 L 117.15047 18.446419 L 117.15047 15.639355 L 117.15047 3.0049845 A 4.3846192 3.0067283 0 0 0 112.76883 0 L 98.062231 0 z M 22.095292 0.11110433 A 4.3846192 3.0067283 0 0 0 18.316195 3.0049845 L 18.316195 4.4023153 L 18.316195 15.639355 L 18.316195 18.446419 L 18.316195 22.991878 L 32.494141 22.991878 L 30.451371 18.498096 L 22.095292 0.11110433 z M 18.316195 24.939046 L 18.316195 132.46168 A 4.3846192 3.0067283 0 0 0 22.697839 135.46667 L 23.104016 135.46667 A 4.3846192 3.0067283 0 0 0 26.649536 134.23005 L 67.731783 95.479443 L 108.81713 134.23005 A 4.3846192 3.0067283 0 0 0 112.36265 135.46667 L 112.76883 135.46667 A 4.3846192 3.0067283 0 0 0 117.15047 132.46168 L 117.15047 24.939046 L 18.316195 24.939046 z " />
+</svg>

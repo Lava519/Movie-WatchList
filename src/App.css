@@ -1,3 +1,5 @@
 .non-nav {
   margin-left: 80px;
+  position: relative;
+  background-color: #003050;
 }

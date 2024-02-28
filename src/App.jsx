@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Nav from './components/nav/Nav.jsx';
 import Grid from './components/grid/Grid.jsx';
 import Home from './components/home/Home.jsx';
+import Loading from './components/loading/Loading.jsx';
 import './App.css'
 
 function App() {
@@ -33,8 +34,9 @@ function App() {
   }
   return (
     <>
-      <Nav action={navClick}></Nav>
+      <Nav action={navClick} name={name}></Nav>
       <div className="non-nav">
+        {isScraping && <Loading></Loading>}
         {!isScraping && <Home data={scrapeData} ></Home>}
       </div>
     </>

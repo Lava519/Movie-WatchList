@@ -3,15 +3,18 @@
   grid-template-columns: repeat(10, 1fr);
   justify-content: space-evenly;
   justify-items: center;
-  align-items: center;
+  align-items: start;
 }
 
 .grid-item {
   display: flex;
   flex-direction: column;
-  justify-content: start;
   align-items: center;
   text-align: center;
+}
+
+.grid-item > img {
+  border-radius: 15px;
 }
 
 @media (max-width: 1600px) {
