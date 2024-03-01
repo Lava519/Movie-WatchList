@@ -9,6 +9,8 @@ const favoriteSelector = {title:'.fan-picks > div > div > div > div > .ipc-poste
 const moviesURL = 'https://www.imdb.com/chart/top/';
 const moviesSelector = {title:'.ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > div > .ipc-title > .ipc-title-link-wrapper > h3', image: '.ipc-metadata-list > .ipc-metadata-list-summary-item > div > .ipc-poster > .ipc-media > .ipc-image'};
 
+const tvshowsURL = 'https://www.imdb.com/chart/toptv/';
+const limit = 100;
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -76,11 +78,26 @@ async function scrape(data) {
         await page.waitForSelector( moviesSelector.image, {
           visible: true,
         });
-        const mTitles = await page.$$eval(moviesSelector.title , el => el.map( e => e.textContent ))
+        const mTitles = await page.$$eval(moviesSelector.title , el => el.map( e => e.textContent.slice(e.textContent.indexOf(' ')+1)));
         const mImages = await page.$$eval(moviesSelector.image , el => el.map( e => e.src ));
-        for ( i in mImages)
+        for (i = 0; i < 100; ++i)
           returnData.movies.push({id: i, title: mTitles[i], image: mImages[i]});
         page.close();
+        break;
+        case "tv-shows":
+          returnData = {
+            tvshows: []
+          }
+          await page.goto(tvshowsURL);
+          await page.waitForSelector( moviesSelector.image, {
+            visible: true,
+          });
+          const tvTitles = await page.$$eval(moviesSelector.title , el => el.map( e => e.textContent.slice(e.textContent.indexOf(' ')+1 )));
+          const tvImages = await page.$$eval(moviesSelector.image , el => el.map( e => e.src ));
+          for (i = 0; i < 100; ++i)
+            returnData.tvshows.push({id: i, title: tvTitles[i], image: tvImages[i]});
+          page.close();
+          break;
       default:
         break;
     }
