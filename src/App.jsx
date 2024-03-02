@@ -3,12 +3,15 @@ import Nav from './components/nav/Nav.jsx';
 import Home from './components/home/Home.jsx';
 import Loading from './components/loading/Loading.jsx';
 import Grid from './components/grid/Grid.jsx';
+import Search from './components/search/Search.jsx';
 import './App.css'
 
 function App() {
   const [scrapeData, setScrapeData] = useState({});
   const [name, setName] = useState("home");
   const [isScraping, setIsScraping] = useState(true);
+  const [searchToggle, setSearchToggle] = useState(false);
+  const [searchClass, setSearchClass] = useState("");
   useEffect(() => {
     async function initialScrape() {
       setIsScraping(true);
@@ -29,10 +32,24 @@ function App() {
   const navClick = (clickName) => {
     setName(clickName);
   }
+
+  const toggle = () => {
+    if (searchToggle) {
+      setSearchClass("dissapear");
+      setTimeout(() => {
+       setSearchToggle(false); 
+      }, 500);
+    } else {
+      setSearchClass("");
+      setSearchToggle(true);
+    }
+  }
+
   return (
     <>
-      <Nav action={navClick} name={name}></Nav>
+      <Nav action={navClick} name={name} toggle={toggle}></Nav>
       <div className="non-nav">
+        {searchToggle && <Search animationClass={searchClass}></Search>}
         {isScraping && <Loading></Loading>}
         {!isScraping && name == "home" && <Home data={scrapeData} ></Home>}
         {!isScraping && name == "movies" && <Grid items={scrapeData.movies}></Grid>}
