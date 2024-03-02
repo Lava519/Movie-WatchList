@@ -13,7 +13,6 @@ function App() {
   const [searchToggle, setSearchToggle] = useState(false);
   const [searchClass, setSearchClass] = useState("");
   useEffect(() => {
-    console.log("SCRAPING");
     async function initialScrape() {
       setIsScraping(true);
       const res = await fetch("http://localhost:3000/", {

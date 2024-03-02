@@ -5,7 +5,6 @@ export default function search({animationClass, searchScrape}) {
   const [query, setQuery] = useState("");
   const handleSearchChange = (e) => {
     setQuery(`:${e.target.value}`);
-    console.log(query);
   }
   return (
     <div className={"search-container "+ animationClass }>
