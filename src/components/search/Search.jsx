@@ -1,11 +1,17 @@
-import "./Search.css"
+import { useState } from 'react';
+import "./Search.css";
 
-export default function search({animationClass}) {
+export default function search({animationClass, searchScrape}) {
+  const [query, setQuery] = useState("");
+  const handleSearchChange = (e) => {
+    setQuery(`:${e.target.value}`);
+    console.log(query);
+  }
   return (
     <div className={"search-container "+ animationClass }>
-      <input className="search" type="text" />
-      <div className="search-icon">
-        <img src="logo.svg"  />
+      <input onChange={handleSearchChange} className="search" type="text" />
+      <div onClick={()=>{searchScrape(query)}} className="search-icon">
+        <img src="search.svg" />
       </div>
     </div>  
   )

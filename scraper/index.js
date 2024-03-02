@@ -7,10 +7,23 @@ const trendingSelector = {title:'.top-ten > div > div > div > div > .ipc-poster-
 const favoriteSelector = {title:'.fan-picks > div > div > div > div > .ipc-poster-card > .ipc-poster-card__title > span', image:'.fan-picks > div > div > div > div > .ipc-poster-card > .ipc-poster > .ipc-media > .ipc-image'}
 
 const moviesURL = 'https://www.imdb.com/chart/top/';
-const moviesSelector = {title:'.ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > div > .ipc-title > .ipc-title-link-wrapper > h3', image: '.ipc-metadata-list > .ipc-metadata-list-summary-item > div > .ipc-poster > .ipc-media > .ipc-image'};
+const moviesSelector = {
+  title:'.ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > div > .ipc-title > .ipc-title-link-wrapper > h3', 
+  image: '.ipc-metadata-list > .ipc-metadata-list-summary-item > div > .ipc-poster > .ipc-media > .ipc-image'
+};
 
 const tvshowsURL = 'https://www.imdb.com/chart/toptv/';
+
+const searchURL = (query) => {
+  return (`https://www.imdb.com/find/?q=${query}&s=tt`);
+}
+const searchSelector = {
+  title: '.ipc-page-section > div > .ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > .ipc-metadata-list-summary-item__t',
+  image: '.ipc-page-section > div > .ipc-metadata-list > .ipc-metadata-list-summary-item > div > .ipc-media > .ipc-image'
+};
+
 const limit = 100;
+const searchLimit = 20;
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -49,7 +62,7 @@ async function scrape(data) {
       deviceScaleFactor: 1,
     });
     let returnData = {};
-    //WILL RETURN WRONG DATA IF CHANGED FREQUENTLY!!!!
+    console.log(data);
     switch (data) {
       case "home":
         returnData = {
@@ -99,6 +112,19 @@ async function scrape(data) {
           page.close();
           break;
       default:
+        returnData = {
+          search: [] 
+        }
+        let query = data.slice(1);
+        await page.goto(searchURL(query));
+        await page.waitForSelector( searchSelector.image, {
+          visible: true
+        });
+        const sTitles = await page.$$eval(searchSelector.title , el => el.map( e => e.textContent));
+        const sImages = await page.$$eval(searchSelector.image , el => el.map( e => e.src ));
+        for ( i = 0; i < searchLimit; ++i )
+          returnData.search.push({id: i, title: sTitles[i], image: sImages[i]});
+        page.close();
         break;
     }
     return returnData; 
