@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 135.46666 135.46667"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   sodipodi:docname="bookmark-checked.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.93435918"
+     inkscape:cx="202.8128"
+     inkscape:cy="282.54659"
+     inkscape:window-width="1920"
+     inkscape:window-height="1020"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1"
+     showguides="true" />
+  <defs
+     id="defs1" />
+  <path
+     id="path116"
+     style="font-variation-settings:normal;display:inline;opacity:1;fill:#ff6c00;fill-opacity:1;stroke-width:7.25;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers;stop-color:#000000;stop-opacity:1;stroke:#000000"
+     d="M 24.976083,3.4264133 A 4.1628156,2.8546276 0 0 0 20.815835,6.279281 V 7.6062212 18.274391 20.939843 129.18738 a 4.1628156,2.8546276 0 0 0 4.160248,2.85287 h 0.385489 a 4.1628156,2.8546276 0 0 0 3.366493,-1.17423 L 67.731651,94.076072 106.73861,130.86602 a 4.1628156,2.8546276 0 0 0 3.36649,1.17423 h 0.38549 a 4.1628156,2.8546276 0 0 0 4.16024,-2.85287 V 20.939843 18.274391 6.279281 A 4.1628156,2.8546276 0 0 0 110.49059,3.4264133 H 93.347707 78.137328 62.927796 47.716575 32.507042 Z" />
+</svg>

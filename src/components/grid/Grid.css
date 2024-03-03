@@ -4,9 +4,11 @@
   justify-content: space-evenly;
   justify-items: center;
   align-items: start;
+  padding: 2em 0;
 }
 
 .grid-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +17,22 @@
 
 .grid-item > img {
   border-radius: 15px;
-  min-width: 140px; /*FIX UPSCALing TEMPORARY */
+}
+
+.bookmark-button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+  display: block;
+  width: 20px;
+}
+.bookmark-button > img {
+  width: 100%;
+}
+
+.grid-title {
+  max-width: 140px;
 }
 
 @media (max-width: 1600px) {

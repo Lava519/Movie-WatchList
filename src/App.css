@@ -1,4 +1,5 @@
 .non-nav {
+  min-height: 100vh;
   margin-left: 80px;
   position: relative;
   background-color: #003050;

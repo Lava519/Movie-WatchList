@@ -6,8 +6,13 @@ export default function search({animationClass, searchScrape}) {
   const handleSearchChange = (e) => {
     setQuery(`:${e.target.value}`);
   }
+  const handleKeyPress = (e) => {
+    if (e.key == 'Enter') {
+      searchScrape(query);
+    }
+  }
   return (
-    <div className={"search-container "+ animationClass }>
+    <div onKeyDown={handleKeyPress} className={"search-container "+ animationClass }>
       <input onChange={handleSearchChange} className="search" type="text" />
       <div onClick={()=>{searchScrape(query)}} className="search-icon">
         <img src="search.svg" />

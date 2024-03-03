@@ -14,13 +14,26 @@ const moviesSelector = {
 
 const tvshowsURL = 'https://www.imdb.com/chart/toptv/';
 
+const resizeConst = {
+  x: '_V1_QL75_UX140_CR0,1,140,207_.jpg',
+  y: '_V1_QL75_UY207_CR4,0,140,207_.jpg'
+};
 const searchURL = (query) => {
   return (`https://www.imdb.com/find/?q=${query}&s=tt`);
 }
+
 const searchSelector = {
   title: '.ipc-page-section > div > .ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > .ipc-metadata-list-summary-item__t',
-  image: '.ipc-page-section > div > .ipc-metadata-list > .ipc-metadata-list-summary-item > div > .ipc-media > .ipc-image'
+  image: '.ipc-page-section > div > .ipc-metadata-list > .ipc-metadata-list-summary-item > div > .ipc-media > :first-child'
 };
+
+const resizeImage = (imgLink) => {
+  if (imgLink == undefined)
+    return 'undefined.png';
+  if (imgLink.slice(-20,-19) == 'X')
+    return imgLink.slice(0, -30) + resizeConst.x;
+  return imgLink.slice(0, -30) + resizeConst.y;
+}
 
 const limit = 100;
 const searchLimit = 20;
@@ -117,13 +130,21 @@ async function scrape(data) {
         }
         let query = data.slice(1);
         await page.goto(searchURL(query));
+        if (await page.$(searchSelector.title) == null )
+          return {
+            search: [{
+              id: 0,
+              title: "NOT FOUND",
+              image: "undefined.png"
+          }]
+         }
         await page.waitForSelector( searchSelector.image, {
           visible: true
         });
         const sTitles = await page.$$eval(searchSelector.title , el => el.map( e => e.textContent));
         const sImages = await page.$$eval(searchSelector.image , el => el.map( e => e.src ));
         for ( i = 0; i < searchLimit; ++i )
-          returnData.search.push({id: i, title: sTitles[i], image: sImages[i]});
+          returnData.search.push({id: i, title: sTitles[i], image: resizeImage(sImages[i])});
         page.close();
         break;
     }

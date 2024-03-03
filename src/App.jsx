@@ -12,6 +12,8 @@ function App() {
   const [isScraping, setIsScraping] = useState(true);
   const [searchToggle, setSearchToggle] = useState(false);
   const [searchClass, setSearchClass] = useState("");
+  const [bookmark, setBookmark] = useState([]);
+  
   useEffect(() => {
     async function initialScrape() {
       setIsScraping(true);
@@ -51,16 +53,23 @@ function App() {
     }
   }
 
+  const addBookmark = (item) => {
+    if (bookmark.filter((x) => x.title == item.title).length == 0) {
+      setBookmark([...bookmark, {title: item.title, image: item.image}]); {/*currently bookmarks don't have keys */}
+    }
+  }
+
   return (
     <>
       <Nav action={navClick} name={name} toggle={toggle}></Nav>
       <div className="non-nav">
         {searchToggle && <Search animationClass={searchClass} searchScrape={searchScrape}></Search>}
         {isScraping && <Loading></Loading>}
-        {!isScraping && name == "home" && <Home data={scrapeData} ></Home>}
-        {!isScraping && name[0] == ":" && <Grid items={scrapeData.search}></Grid> }
-        {!isScraping && name == "movies" && <Grid items={scrapeData.movies}></Grid>}
-        {!isScraping && name == "tv-shows" && <Grid items={scrapeData.tvshows}></Grid>}
+        {!isScraping && name == "home" && <Home add={addBookmark} data={scrapeData} ></Home>}
+        {!isScraping && name[0] == ":" && <Grid add={addBookmark} items={scrapeData.search}></Grid> }
+        {!isScraping && name == "movies" && <Grid add={addBookmark} items={scrapeData.movies}></Grid>}
+        {!isScraping && name == "tv-shows" && <Grid add={addBookmark} items={scrapeData.tvshows}></Grid>}
+        {name == "bookmarks" && <Grid items={bookmark}></Grid>} 
       </div>
     </>
   )
