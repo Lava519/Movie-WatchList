@@ -7,13 +7,29 @@ import Search from './components/search/Search.jsx';
 import './App.css'
 
 function App() {
+  const isStorageEmpty = localStorage.length == 0;
+  const initialBookmarkID = () => {
+    if (!isStorageEmpty)
+      return Number(localStorage.getItem('bID'));
+    localStorage.setItem('bID', 0);
+    return 0;
+  }
+  const initialBookmarks = () => {
+    let temp = [];
+    for (let key in {...localStorage}) {
+      if(key != 'bID')
+        temp.push(JSON.parse(localStorage.getItem(key)));
+    }
+    return temp;
+  }
+
   const [scrapeData, setScrapeData] = useState({});
   const [name, setName] = useState("home");
   const [isScraping, setIsScraping] = useState(true);
   const [searchToggle, setSearchToggle] = useState(false);
   const [searchClass, setSearchClass] = useState("");
-  const [bookmark, setBookmark] = useState([]);
-  
+  const [bookmarkID, setBookmarkID] = useState(initialBookmarkID);
+  const [bookmark, setBookmark] = useState(initialBookmarks);
   useEffect(() => {
     async function initialScrape() {
       setIsScraping(true);
@@ -56,7 +72,8 @@ function App() {
   const addBookmark = (item) => {
     if (bookmark.filter((x) => x.title == item.title).length == 0) {
       setBookmark([...bookmark, {title: item.title, image: item.image}]); {/*currently bookmarks don't have keys */}
-    }
+      localStorage.setItem(item.title, JSON.stringify({title: item.title,image: item.image}));
+    } 
   }
 
   return (

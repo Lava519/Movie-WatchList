@@ -8,7 +8,7 @@ export default function Grid({ items, add }) {
         return (
           <div className="grid-item" key={item.id}>
             <a onClick={()=> {add(item)}} className="bookmark-button">
-              <img src="bookmark-unchecked.svg" />
+              <img src={localStorage.getItem(item.title) ? "bookmark-checked.svg" : "bookmark-unchecked.svg"} />
             </a>
             <img src={item.image}/>
             <p className="grid-title">{item.title}</p>
