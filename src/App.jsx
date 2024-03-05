@@ -30,6 +30,7 @@ function App() {
   const [searchClass, setSearchClass] = useState("");
   const [bookmarkID, setBookmarkID] = useState(initialBookmarkID);
   const [bookmark, setBookmark] = useState(initialBookmarks);
+  
   useEffect(() => {
     async function initialScrape() {
       setIsScraping(true);
@@ -69,11 +70,16 @@ function App() {
     }
   }
 
-  const addBookmark = (item) => {
+  const modifyBookmark = (item) => {
     if (bookmark.filter((x) => x.title == item.title).length == 0) {
-      setBookmark([...bookmark, {title: item.title, image: item.image}]); {/*currently bookmarks don't have keys */}
-      localStorage.setItem(item.title, JSON.stringify({title: item.title,image: item.image}));
-    } 
+      setBookmark([...bookmark, {id: bookmarkID, title: item.title, image: item.image}]);
+      localStorage.setItem(item.title, JSON.stringify({id: bookmarkID, title: item.title, image: item.image}));
+      localStorage.setItem('bID', bookmarkID+1);
+      setBookmarkID(bookmarkID+1);
+    } else {
+      setBookmark(bookmark.filter((x) => x.title != item.title));
+      localStorage.removeItem(item.title);
+    }
   }
 
   return (
@@ -82,10 +88,10 @@ function App() {
       <div className="non-nav">
         {searchToggle && <Search animationClass={searchClass} searchScrape={searchScrape}></Search>}
         {isScraping && <Loading></Loading>}
-        {!isScraping && name == "home" && <Home add={addBookmark} data={scrapeData} ></Home>}
-        {!isScraping && name[0] == ":" && <Grid add={addBookmark} items={scrapeData.search}></Grid> }
-        {!isScraping && name == "movies" && <Grid add={addBookmark} items={scrapeData.movies}></Grid>}
-        {!isScraping && name == "tv-shows" && <Grid add={addBookmark} items={scrapeData.tvshows}></Grid>}
+        {!isScraping && name == "home" && <Home modify={modifyBookmark} data={scrapeData} ></Home>}
+        {!isScraping && name[0] == ":" && <Grid modify={modifyBookmark} items={scrapeData.search}></Grid> }
+        {!isScraping && name == "movies" && <Grid modify={modifyBookmark} items={scrapeData.movies}></Grid>}
+        {!isScraping && name == "tv-shows" && <Grid modify={modifyBookmark} items={scrapeData.tvshows}></Grid>}
         {name == "bookmarks" && <Grid items={bookmark}></Grid>} 
       </div>
     </>

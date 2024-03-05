@@ -9,7 +9,7 @@
   padding-left: 0;
   background-color: #001b2e;
   z-index: 3;
-  overflow-y: scroll;
+  overflow-y: hidden;
   overflow-x: hidden;
 }
 
@@ -46,6 +46,20 @@
   filter: hue-rotate(180deg) brightness(600%)!important; 
 }
 
+@media screen and (max-height: 500px) {
+  .nav > li:first-child {
+    padding-top: 0.5em;
+  }
+  .nav > li:last-child {
+    padding-bottom: 0.2em;
+  }
+}
+
+@media screen and (max-height: 420px) {
+  .nav {
+    overflow-y: scroll;
+  }
+}
 @keyframes click {
   0% {
     scale: 1;
