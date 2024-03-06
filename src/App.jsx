@@ -85,14 +85,14 @@ function App() {
   return (
     <>
       <Nav action={navClick} name={name} toggle={toggle}></Nav>
-      <div className="non-nav">
+      <div className={`non-nav ${searchToggle ? "down" : ""}`}>
         {searchToggle && <Search animationClass={searchClass} searchScrape={searchScrape}></Search>}
         {isScraping && <Loading></Loading>}
         {!isScraping && name == "home" && <Home modify={modifyBookmark} data={scrapeData} ></Home>}
         {!isScraping && name[0] == ":" && <Grid modify={modifyBookmark} items={scrapeData.search}></Grid> }
         {!isScraping && name == "movies" && <Grid modify={modifyBookmark} items={scrapeData.movies}></Grid>}
         {!isScraping && name == "tv-shows" && <Grid modify={modifyBookmark} items={scrapeData.tvshows}></Grid>}
-        {name == "bookmarks" && <Grid items={bookmark}></Grid>} 
+        {name == "bookmarks" && <Grid modify={modifyBookmark} items={bookmark}></Grid>} 
       </div>
     </>
   )

@@ -3,4 +3,30 @@
   margin-left: 80px;
   position: relative;
   background-color: #003050;
+  animation: 0.1s forwards up;
+}
+
+.down {
+  animation: 0.2s forwards down;
+}
+
+@keyframes down {
+  0% {
+    padding-top: 0px;
+  }
+
+  100% {
+    padding-top: 112px;
+  }
+}
+
+@keyframes up {
+  0% {
+    padding-top: 112px;
+  }
+
+  100% {
+    padding-top: 0px;
+  }
+  
 }
