@@ -1,3 +1,9 @@
+# Movie Watchlist
+## Preview
+### Scrape and preview content from IMDb
+![](docs/0.gif)
+### Search and save
+![](docs/1.gif)
 ## Installation
 1. Open terminal and type following commands:\
     `git clone https://github.com/Lava519/Movie-WatchList.git`\
