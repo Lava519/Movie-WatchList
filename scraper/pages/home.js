@@ -12,7 +12,7 @@ const home = async (page) => {
   };
   await page.goto(FAVORITES_URL);
   await page.waitForNetworkIdle();
-  const tTitles = await page.$$eval(TRENDING.title, el => el.map(e => e.textContent.slice(e.textContent.indexOf(' ') + 1)));
+  const tTitles = await page.$$eval(TRENDING.title, el => el.map(e => e.textContent));
   const tImages = await page.$$eval(TRENDING.image, el => el.map(e => e.src));
   await page.goto(TRENDING_URL);
   await page.waitForNetworkIdle();
