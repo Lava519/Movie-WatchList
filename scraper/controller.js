@@ -22,7 +22,7 @@ const scrape = async (browserInstance, data) => {
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36');
         await page.setViewport({
           width: 640,
-          height: 1920,
+          height: 2560,
           deviceScaleFactor: 1,
         });
         let returnData = {};
