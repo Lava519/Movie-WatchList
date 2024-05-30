@@ -1,0 +1,21 @@
+version: "3.1"
+services:
+  scraper:
+    build:
+      context: ./scraper
+    ports:
+      - "3000:3000"
+    develop:
+      watch:
+        - action: rebuild
+          path: ./scraper
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173"
+    develop:
+      watch:
+        - action: rebuild
+          path: ./frontend
+

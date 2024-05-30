@@ -7,7 +7,10 @@ const { search } = require('./pages/search');
 const startBrowser = async () => {
     let browser;
     try {
-        browser = await puppeteer.launch();
+        browser = await puppeteer.launch({
+            args: ['--no-sandbox'],
+            timeout: 10000
+        });
     } catch (err) {
         console.log("Could not create a browser instance => : ", err);
     }
