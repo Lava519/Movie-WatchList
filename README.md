@@ -21,4 +21,4 @@
 2. Run with docker:\
     `docker compose up`\
     or\
-    `docker compose up --watch` for automatic updates when editing
+    `docker compose up --watch` for automatic updates when editing.
