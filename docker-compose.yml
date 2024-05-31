@@ -16,6 +16,7 @@ services:
       - "5173:5173"
     develop:
       watch:
-        - action: rebuild
+        - action: sync
           path: ./frontend
+          target: /app
 
