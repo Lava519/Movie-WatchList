@@ -7,17 +7,9 @@ import Search from './components/search/Search.jsx';
 import './App.css'
 
 function App() {
-  const isStorageEmpty = localStorage.length == 0;
-  const initialBookmarkID = () => {
-    if (!isStorageEmpty)
-      return Number(localStorage.getItem('bID'));
-    localStorage.setItem('bID', 0);
-    return 0;
-  }
   const initialBookmarks = () => {
     let temp = [];
     for (let key in {...localStorage}) {
-      if(key != 'bID')
         temp.push(JSON.parse(localStorage.getItem(key)));
     }
     return temp;
@@ -28,7 +20,6 @@ function App() {
   const [isScraping, setIsScraping] = useState(true);
   const [searchToggle, setSearchToggle] = useState(false);
   const [searchClass, setSearchClass] = useState("");
-  const [bookmarkID, setBookmarkID] = useState(initialBookmarkID);
   const [bookmark, setBookmark] = useState(initialBookmarks);
   
   useEffect(() => {
@@ -43,6 +34,7 @@ function App() {
         body: JSON.stringify({data: name})
       });
       const data = await res.json();
+      console.log(data);
       setScrapeData({...scrapeData,...data.data,});
     }
   if ((name == "home" && !scrapeData.trending) || ( name == "movies" && !scrapeData.movies) || ( name == "tv-shows" && !scrapeData.tvshows || name[0] == ":" ))
@@ -71,14 +63,12 @@ function App() {
   }
 
   const modifyBookmark = (item) => {
-    if (bookmark.filter((x) => x.title == item.title).length == 0) {
-      setBookmark([...bookmark, {id: bookmarkID, title: item.title, image: item.image}]);
-      localStorage.setItem(item.title, JSON.stringify({id: bookmarkID, title: item.title, image: item.image}));
-      localStorage.setItem('bID', bookmarkID+1);
-      setBookmarkID(bookmarkID+1);
+    if (bookmark.filter((x) => x.id == item.id).length == 0) {
+      setBookmark([...bookmark, {id: item.id, title: item.title, image: item.image}]);
+      localStorage.setItem(item.id, JSON.stringify({id: item.id, title: item.title, image: item.image}));
     } else {
-      setBookmark(bookmark.filter((x) => x.title != item.title));
-      localStorage.removeItem(item.title);
+      setBookmark(bookmark.filter((x) => x.id != item.id));
+      localStorage.removeItem(item.id);
     }
   }
 

@@ -1,6 +1,7 @@
 const SEARCH = {
     title: '.ipc-page-section > div > .ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > .ipc-metadata-list-summary-item__t',
-    image: '.ipc-page-section > div > .ipc-metadata-list > .ipc-metadata-list-summary-item > div > .ipc-media > :first-child'
+    image: '.ipc-page-section > div > .ipc-metadata-list > .ipc-metadata-list-summary-item > div > .ipc-media > :first-child',
+    url: '.ipc-page-section > div > .ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > a'
 };
 
 const LIMIT = 20;
@@ -39,8 +40,9 @@ const search = async (page, data) => {
         }
     const sTitles = await page.$$eval(SEARCH.title, el => el.map(e => e.textContent));
     const sImages = await page.$$eval(SEARCH.image, el => el.map(e => e.src));
+    const sURL = await page.$$eval(SEARCH.url, el => el.map(e => e.href.split('/')[e.href.split('/').length - 2]));
     for (i = 0; i < LIMIT; ++i)
-        returnData.search.push({ id: i, title: sTitles[i], image: resizeImage(sImages[i]) });
+        returnData.search.push({ id: sURL[i], title: sTitles[i], image: resizeImage(sImages[i]) });
     page.close();
     return returnData;
 }
