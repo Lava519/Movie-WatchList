@@ -10,6 +10,8 @@ services:
         - action: rebuild
           path: ./scraper
   frontend:
+    depends_on:
+      - "scraper"
     build:
       context: ./frontend
     ports:
