@@ -1,19 +1,15 @@
-import { useState, useEffect } from "react";
 import "./Rating.css"
 export default function Rating({rating}) {
-    const [starRating, setStarRating] = useState([]);
-    useEffect(()=> {
-        const stars = () => {
-            let arr = [];
-            for (let i = 1; i < rating/2; ++i) {
-                arr.push(true);
-            }
-            if ( rating - Math.floor(rating) > 0.2)
-                arr.push(false);
-            return arr;
+    const stars = () => {
+        let arr = [];
+        for (let i = 1; i < rating/2; ++i) {
+            arr.push(true);
         }
-        setStarRating(stars());
-    }, [])
+        if ( rating - Math.floor(rating) > 0.2)
+            arr.push(false);
+        return arr;
+    }
+    const starRating = stars();
     return (
         <div className="rating-container">
             <div className="star-container">
