@@ -64,8 +64,8 @@ function App() {
 
   const modifyBookmark = (item) => {
     if (bookmark.filter((x) => x.id == item.id).length == 0) {
-      setBookmark([...bookmark, {id: item.id, title: item.title, image: item.image}]);
-      localStorage.setItem(item.id, JSON.stringify({id: item.id, title: item.title, image: item.image}));
+      setBookmark([...bookmark, {id: item.id, title: item.title, image: item.image, rating: item.rating}]);
+      localStorage.setItem(item.id, JSON.stringify({id: item.id, title: item.title, image: item.image, rating: item.rating}));
     } else {
       setBookmark(bookmark.filter((x) => x.id != item.id));
       localStorage.removeItem(item.id);
