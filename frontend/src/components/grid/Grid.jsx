@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import Rating from "../Rating/Rating";
 import "./Grid.css";
 
 
@@ -12,6 +12,7 @@ export default function Grid({ items, modify }) {
               <img src={localStorage.getItem(item.id) ? "bookmark-checked.svg" : "bookmark-unchecked.svg"} />
             </a>
             <img src={item.image}/>
+            <Rating rating={item.rating}></Rating>
             <p className="grid-title">{item.title}</p>
           </div>
         )

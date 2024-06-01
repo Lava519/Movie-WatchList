@@ -1,26 +1,35 @@
 const SEARCH = {
-    title: '.ipc-page-section > div > .ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > .ipc-metadata-list-summary-item__t',
-    image: '.ipc-page-section > div > .ipc-metadata-list > .ipc-metadata-list-summary-item > div > .ipc-media > :first-child',
-    url: '.ipc-page-section > div > .ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > a'
+    title: '.ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > div > div > div > .ipc-title > a > h3',
+    image: '.ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > div > div > div > div > .ipc-media > :first-child',
+    url: '.ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > div > div > div > .ipc-title > a',
+    rating: '.ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > div > div > div > span > div > .ipc-rating-star'
 };
 
-const LIMIT = 20;
-
-const RESIZE = {
-    x: '_V1_QL75_UX140_CR0,1,140,207_.jpg',
-    y: '_V1_QL75_UY207_CR4,0,140,207_.jpg'
-};
+const LIMIT = 10;
 
 const searchURL = (query) => {
-    return (`https://www.imdb.com/find/?q=${query}&s=tt`);
+    return (`https://www.imdb.com/search/title/?title=${query}`);
 }
 
-const resizeImage = (imgLink) => {
+const filterUnique = (array) => {
+    let temp = [];
+    for (let i = 0; i < array.length; ++i) {
+        let found = false
+        for ( j in temp) {
+            if (temp[j].id===array[i].id) {
+                found = true
+            }
+        }
+        if (!found)
+            temp.push(array[i]);
+    }
+    return temp;
+}
+
+const checkImage = (imgLink) => {
     if (imgLink == undefined)
         return 'undefined.png';
-    if (imgLink.slice(-20, -19) == 'X')
-        return imgLink.slice(0, -30) + RESIZE.x;
-    return imgLink.slice(0, -30) + RESIZE.y;
+    return imgLink;
 }
 
 const search = async (page, data) => {
@@ -38,11 +47,13 @@ const search = async (page, data) => {
                 image: "undefined.png"
             }]
         }
-    const sTitles = await page.$$eval(SEARCH.title, el => el.map(e => e.textContent));
+    const sTitles = await page.$$eval(SEARCH.title, el => el.map(e => e.textContent.slice(e.textContent.indexOf(' '))));
     const sImages = await page.$$eval(SEARCH.image, el => el.map(e => e.src));
     const sURL = await page.$$eval(SEARCH.url, el => el.map(e => e.href.split('/')[e.href.split('/').length - 2]));
+    const sRating = await page.$$eval(SEARCH.rating, el => el.map(e => e.textContent.slice(0, 3)));
     for (i = 0; i < LIMIT; ++i)
-        returnData.search.push({ id: sURL[i], title: sTitles[i], image: resizeImage(sImages[i]) });
+        returnData.search.push({ id: sURL[i], title: sTitles[i], image: checkImage(sImages[i]), rating: sRating[i] });
+    returnData.search = filterUnique(returnData.search);
     page.close();
     return returnData;
 }
