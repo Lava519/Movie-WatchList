@@ -1,9 +1,9 @@
 const URL = 'https://www.imdb.com/chart/top/';
 const MOVIES = {
-    title: '.ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > div > .ipc-title > .ipc-title-link-wrapper > h3',
-    image: '.ipc-metadata-list > .ipc-metadata-list-summary-item > div > .ipc-poster > .ipc-media > .ipc-image',
+    title: 'div > div > div > .ipc-title > .ipc-title-link-wrapper > h3',
+    image: 'div > .ipc-poster > .ipc-media > .ipc-image',
     url: '.ipc-metadata-list > .ipc-metadata-list-summary-item > div > .ipc-poster > a',
-    rating: '.ipc-metadata-list > .ipc-metadata-list-summary-item > div > div > div > span > div > span'
+    rating: 'div > div > div > span > div > span > .ipc-rating-star--rating'
 };
 
 const movies = async (page) => {

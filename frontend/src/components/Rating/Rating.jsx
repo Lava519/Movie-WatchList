@@ -2,10 +2,10 @@ import "./Rating.css"
 export default function Rating({rating}) {
     const stars = () => {
         let arr = [];
-        for (let i = 1; i < rating/2; ++i) {
+        for (let i = 1; i < Math.floor(rating)-4; ++i) {
             arr.push(true);
         }
-        if ( rating - Math.floor(rating) > 0.2)
+        if ( rating - Math.floor(rating) > 0.2 || rating < 5)
             arr.push(false);
         return arr;
     }
