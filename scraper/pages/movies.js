@@ -2,7 +2,7 @@ const URL = 'https://www.imdb.com/chart/top/';
 const MOVIES = {
     title: 'div > div > div > .ipc-title > .ipc-title-link-wrapper > h3',
     image: 'div > .ipc-poster > .ipc-media > .ipc-image',
-    url: '.ipc-metadata-list > .ipc-metadata-list-summary-item > div > .ipc-poster > a',
+    url: 'div > div > div > .ipc-title > .ipc-title-link-wrapper',
     rating: 'div > div > div > span > div > span > .ipc-rating-star--rating'
 };
 
