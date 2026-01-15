@@ -13,7 +13,7 @@ const tvshows = async (page) => {
     }
     await page.goto(URL);
     await page.waitForNetworkIdle();
-    const tvTitles = await page.$$eval(TVSHOWS.title, el => el.map(e => e.textContent.slice(e.textContent.indexOf(' ') + 1)));
+    const tvTitles = await page.$$eval(TVSHOWS.title, el => el.map(e => e.textContent));
     const tvImages = await page.$$eval(TVSHOWS.image, el => el.map(e => e.src.slice(0, e.src.lastIndexOf('_V1'))+"jpg"));
     const tvURL = await page.$$eval(TVSHOWS.url, el => el.map(e => e.href.split('/')[e.href.split('/').length - 2]));
     const tvRating = await page.$$eval(TVSHOWS.rating, el => el.map(e => e.textContent.slice(0, 3)));
