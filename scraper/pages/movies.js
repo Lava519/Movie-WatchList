@@ -12,8 +12,8 @@ const movies = async (page) => {
     }
     await page.goto(URL);
     await page.waitForNetworkIdle();
-    const mTitles = await page.$$eval(MOVIES.title, el => el.map(e => e.textContent.slice(e.textContent.indexOf(' ') + 1)));
-    const mImages = await page.$$eval(MOVIES.image, el => el.map(e => e.src));
+    const mTitles = await page.$$eval(MOVIES.title, el => el.map(e => e.textContent));
+    const mImages = await page.$$eval(MOVIES.image, el => el.map(e => e.src.slice(0, e.src.lastIndexOf('_V1'))+"jpg"));
     const mURL = await page.$$eval(MOVIES.url, el => el.map(e => e.href.split('/')[e.href.split('/').length - 2]));
     const mRating = await page.$$eval(MOVIES.rating, el => el.map(e => e.textContent.slice(0, 3)));
     for (i = 0; i < 100; ++i)

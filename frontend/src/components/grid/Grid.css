@@ -17,6 +17,7 @@
 
 .grid-item > img {
   border-radius: 15px;
+  max-width: 140px;
 }
 
 .bookmark-button {
