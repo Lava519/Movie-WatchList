@@ -1,8 +1,19 @@
 const puppeteer = require('puppeteer');
+const fs = require('fs');
 const { home } = require('./pages/home');
 const { movies } = require('./pages/movies');
 const { tvshows } = require('./pages/tvshows');
 const { search } = require('./pages/search');
+
+async function writeJson(jsonData) {
+  await fs.writeFile('./cache/home.json', jsonData, err => {
+    if (err) {
+      console.log('Error writing file', err)
+    } else {
+      console.log('Written to the file');
+    }
+  })
+}
 
 const startBrowser = async () => {
     let browser;

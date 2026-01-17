@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 app.post('/', (req, res) => {
-  scrape(browserInstance, req.body.data).then(data =>{console.log(data);res.send({data:data})});
+  scrape(browserInstance, req.body.data).then(data =>{console.log("data fetced");res.send({data:data})});
 })
 
 app.listen(3000);
