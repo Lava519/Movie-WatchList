@@ -4,6 +4,7 @@ import Home from './components/home/Home.jsx';
 import Loading from './components/loading/Loading.jsx';
 import Grid from './components/grid/Grid.jsx';
 import Search from './components/search/Search.jsx';
+import AdvancedSearch from './components/advancedSearch/AdvancedSearch.jsx';
 import './App.css'
 
 function App() {
@@ -34,7 +35,6 @@ function App() {
         body: JSON.stringify({data: name})
       });
       const data = await res.json();
-      console.log(data);
       setScrapeData({...scrapeData,...data.data,});
     }
   if ((name == "home" && !scrapeData.trending) || ( name == "movies" && !scrapeData.movies) || ( name == "tv-shows" && !scrapeData.tvshows || name[0] == ":" ))
@@ -78,6 +78,7 @@ function App() {
       <div className={`non-nav ${searchToggle ? "down" : ""}`}>
         {searchToggle && <Search animationClass={searchClass} searchScrape={searchScrape}></Search>}
         {isScraping && <Loading></Loading>}
+        {/*{!isScraping && name == "home" &&<AdvancedSearch></AdvancedSearch>}*/}
         {!isScraping && name == "home" && <Home modify={modifyBookmark} data={scrapeData} ></Home>}
         {!isScraping && name[0] == ":" && <Grid modify={modifyBookmark} items={scrapeData.search}></Grid> }
         {!isScraping && name == "movies" && <Grid modify={modifyBookmark} items={scrapeData.movies}></Grid>}

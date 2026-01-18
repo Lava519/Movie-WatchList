@@ -1,1 +1,14 @@
+.asearch-container {
+  display: flex;
+  justify-content: center;
+  height: 150px;
+}
 
+.asearch {
+  text-align: center;
+  padding: 5px;
+  border-radius: 15px;
+  background-color: #001b2e;
+  min-width: 350px;
+  width: 80%;
+}
