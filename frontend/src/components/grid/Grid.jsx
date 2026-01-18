@@ -1,4 +1,4 @@
-import Rating from "../Rating/Rating";
+import Rating from "../rating/Rating";
 import "./Grid.css";
 
 
