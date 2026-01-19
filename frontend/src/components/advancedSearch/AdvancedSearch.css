@@ -1,14 +1,41 @@
 .asearch-container {
   display: flex;
   justify-content: center;
-  height: 150px;
 }
 
 .asearch {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  justify-content: center;
   padding: 5px;
   border-radius: 15px;
   background-color: #001b2e;
   min-width: 350px;
-  width: 80%;
+  padding: 2em;
+  margin-top: 1em;
+}
+
+.abutton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  background-color: #003050;
+  padding: 1em;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.abutton > img {
+  max-width: 100%;
+  filter: grayscale(100%) contrast(0%) brightness(0%) invert(100%); 
+}
+
+.abuttons-container {
+  max-width: 350px;
+  display: flex;
+  gap: 1em;
 }
