@@ -12,7 +12,7 @@ function SearchSelectButtons() {
 function SearchButton({image, toggle, setToggle}) {
   return (
     <div className="abutton" >
-      <img onClick={()=>{setToggle(image)}} className={`${image == toggle && "active"}`} src={`${"../../../public/"}${image}${".svg"}`}></img>
+      <img onClick={()=>{setToggle(image)}} className={`${image == toggle && "active"}`} src={`${"/"}${image}${".svg"}`}></img>
     </div>
   )
 }
