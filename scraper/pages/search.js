@@ -48,7 +48,11 @@ const search = async (page, data) => {
             }]
         }
     const sTitles = await page.$$eval(SEARCH.title, el => el.map(e => e.textContent.slice(e.textContent.indexOf(' '))));
-    const sImages = await page.$$eval(SEARCH.image, el => el.map(e => e.src));
+    const sImages = await page.$$eval(SEARCH.image, el => el.map(e => {
+        if(e.src)
+            return e.src.slice(0, e.src.lastIndexOf('_V1'));
+        return e.src;
+    }));
     const sURL = await page.$$eval(SEARCH.url, el => el.map(e => e.href.split('/')[e.href.split('/').length - 2]));
     const sRating = await page.$$eval(SEARCH.rating, el => el.map(e => e.textContent.slice(0, 3)));
     for (i = 0; i < LIMIT; ++i)
