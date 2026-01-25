@@ -78,7 +78,7 @@ function App() {
       <div className={`non-nav ${searchToggle ? "down" : ""}`}>
         {searchToggle && <Search animationClass={searchClass} searchScrape={searchScrape}></Search>}
         {isScraping && <Loading></Loading>}
-        {/*{!isScraping && name == "home" &&<AdvancedSearch></AdvancedSearch>}*/}
+        {/*{!isScraping && name == "home" &&<AdvancedSearch searchScrape={searchScrape}></AdvancedSearch>}*/}
         {!isScraping && name == "home" && <Home modify={modifyBookmark} data={scrapeData} ></Home>}
         {!isScraping && name[0] == ":" && <Grid modify={modifyBookmark} items={scrapeData.search}></Grid> }
         {!isScraping && name == "movies" && <Grid modify={modifyBookmark} items={scrapeData.movies}></Grid>}

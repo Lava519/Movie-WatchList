@@ -3,6 +3,10 @@
   justify-content: center;
 }
 
+.asearch-h {
+  height: 40px;
+}
+
 .asearch {
   text-align: center;
   display: flex;
