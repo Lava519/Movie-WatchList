@@ -9,7 +9,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #003050;
+}
+
+.loading-child {
+  position: relative;
+  height: auto!important;
 }
 
 .loading-container > img {

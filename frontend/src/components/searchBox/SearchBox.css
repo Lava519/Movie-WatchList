@@ -1,8 +1,14 @@
 .search-box {
   overflow: hidden;
   transition: height 0.2s;
+  background-color: #001b2e;
 }
 
 .search-box-hidden {
-  height: 0;
+  max-height: 0;
+}
+
+.search-box-loading {
+  padding-top: 20px;
+  height: 50px;
 }

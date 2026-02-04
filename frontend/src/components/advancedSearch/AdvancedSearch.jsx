@@ -13,6 +13,12 @@ function SearchButton({image, toggle, setToggle}) {
 export default function AdvancedSearch({searchScrape}) {
   const [query, setQuery] = useState("");
   const [tSearch, setTSearch] = useState("general");
+  
+  const handleKeyPress = (e) => {
+    if (e.key == 'Enter') {
+      searchScrape(`:${tSearch[0]}${query}`);
+    }
+  }
   const setToggle = (name)=> {
     setTSearch(name)
   }
@@ -20,7 +26,7 @@ export default function AdvancedSearch({searchScrape}) {
     setQuery(e.target.value);
   }
   return (
-    <div className="asearch-container">
+    <div className="asearch-container" onKeyDown={handleKeyPress}>
       <div className="asearch">
         <div className="asearch-h asearch-container">
           <input onChange={handleSearchChange} className="search" type="text"/>
@@ -29,9 +35,9 @@ export default function AdvancedSearch({searchScrape}) {
           </div>
         </div>
         <div className="abuttons-container">
-          <SearchButton image="general" toggle={tSearch} setToggle={setToggle}></SearchButton>
-          <SearchButton image="tv-shows" toggle={tSearch} setToggle={setToggle}></SearchButton>
-          <SearchButton image="movies" toggle={tSearch} setToggle={setToggle}></SearchButton>
+          {/*<SearchButton image="general" toggle={tSearch} setToggle={setToggle}></SearchButton>*/}
+          {/*<SearchButton image="tv-shows" toggle={tSearch} setToggle={setToggle}></SearchButton>*/}
+          {/*<SearchButton image="movies" toggle={tSearch} setToggle={setToggle}></SearchButton>*/}
           {/*<SearchButton image="person" toggle={tSearch} setToggle={setToggle}></SearchButton>*/}
         </div>
       </div>

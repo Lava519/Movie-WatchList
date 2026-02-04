@@ -88,8 +88,8 @@ function App() {
       <div className="non-nav">
         {isScraping && <Loading></Loading>}
         {!isScraping && (name == "home" || name[0] == ":") &&<AdvancedSearch searchScrape={searchScrape}></AdvancedSearch>}
-        <SearchBox modify={modifyBookmark} items={scrapeData.search} loading={isSearching} hidden={(name[0] == ":")? true : false}></SearchBox>
-        {!isScraping && name[0] == ":" && <Grid modify={modifyBookmark} dark={true} items={scrapeData.search}></Grid> }
+        <SearchBox modify={modifyBookmark} items={scrapeData.search} loading={isSearching} hidden={(name[0] == ":")? false : true}></SearchBox>
+        {/*!isScraping && name[0] == ":" && <Grid modify={modifyBookmark} dark={true} items={scrapeData.search}></Grid> */}
         {!isScraping && (name == "home" || name[0] == ":") && <Home modify={modifyBookmark} data={scrapeData} ></Home>}
         {!isScraping && name == "movies" && <Grid modify={modifyBookmark} items={scrapeData.movies}></Grid>}
         {!isScraping && name == "tv-shows" && <Grid modify={modifyBookmark} items={scrapeData.tvshows}></Grid>}

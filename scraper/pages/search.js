@@ -36,7 +36,8 @@ const search = async (page, data) => {
     let returnData = {
         search: []
     }
-    let query = data.slice(1);
+    let query = data.slice(2);
+    let category = data[1] 
     await page.goto(searchURL(query));
     await page.waitForNetworkIdle();
     if (await page.$(SEARCH.title) == null)

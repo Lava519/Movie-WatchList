@@ -5,6 +5,9 @@
 
 .asearch-h {
   height: 40px;
+  background-color: #003050;
+  padding: 1em;
+  border-radius: 3em;
 }
 
 .asearch {
@@ -17,7 +20,7 @@
   padding: 5px;
   background-color: #001b2e;
   min-width: 100%;
-  padding: 2em 0;
+  padding-top: 2em;
 }
 
 .abutton {
@@ -41,3 +44,23 @@
   display: flex;
   gap: 1em;
 }
+
+.search {
+  border-radius: 30px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.search-icon {
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.search-icon > img {
+  width: 50%;
+  filter: grayscale(100%) contrast(0%) brightness(0%) invert(100%);
+}
+
