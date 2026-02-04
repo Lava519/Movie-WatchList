@@ -2,9 +2,9 @@ import Rating from "../rating/Rating";
 import "./Grid.css";
 
 
-export default function Grid({ items, modify }) {
+export default function Grid({ items, modify, dark=false}) {
   return (
-    <div className="grid">
+    <div className={`grid ${dark && "grid-dark"}`}>
       {items && items.map( (item) => {
         return (
           <div className="grid-item" key={item.id}>

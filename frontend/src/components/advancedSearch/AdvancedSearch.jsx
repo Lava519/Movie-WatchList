@@ -1,25 +1,18 @@
 import {useState, useEffect} from "react";
 import "./AdvancedSearch.css";
-
-function SearchSelectButtons() {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+import SearchBox from '../searchBox/SearchBox.jsx'
 
 function SearchButton({image, toggle, setToggle}) {
   return (
-    <div className="abutton" >
-      <img onClick={()=>{setToggle(image)}} className={`${image == toggle ? "active" : ""}`} src={`${"/"}${image}${".svg"}`}></img>
+    <div onClick={()=>{setToggle(image)}} className="abutton" >
+      <img className={`${image == toggle ? "active" : ""}`} src={`${"/"}${image}${".svg"}`}></img>
     </div>
   )
 }
 
 export default function AdvancedSearch({searchScrape}) {
   const [query, setQuery] = useState("");
-  const [tSearch, setTSearch] = useState("movies");
+  const [tSearch, setTSearch] = useState("general");
   const setToggle = (name)=> {
     setTSearch(name)
   }
@@ -31,14 +24,15 @@ export default function AdvancedSearch({searchScrape}) {
       <div className="asearch">
         <div className="asearch-h asearch-container">
           <input onChange={handleSearchChange} className="search" type="text"/>
-          <div onClick={()=>{searchScrape(query)}}className="search search-icon">
+          <div onClick={()=>{searchScrape(`:${tSearch[0]}${query}`)}}className="search search-icon">
             <img src="search.svg"/>
           </div>
         </div>
         <div className="abuttons-container">
-          <SearchButton image="movies" toggle={tSearch} setToggle={setToggle}></SearchButton>
-          <SearchButton image="person" toggle={tSearch} setToggle={setToggle}></SearchButton>
+          <SearchButton image="general" toggle={tSearch} setToggle={setToggle}></SearchButton>
           <SearchButton image="tv-shows" toggle={tSearch} setToggle={setToggle}></SearchButton>
+          <SearchButton image="movies" toggle={tSearch} setToggle={setToggle}></SearchButton>
+          {/*<SearchButton image="person" toggle={tSearch} setToggle={setToggle}></SearchButton>*/}
         </div>
       </div>
     </div>

@@ -7,6 +7,10 @@
   padding: 2em 0;
 }
 
+.grid-dark {
+  background-color: #001b2e;
+}
+
 .grid-item {
   position: relative;
   display: flex;

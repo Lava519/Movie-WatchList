@@ -5,6 +5,7 @@ import Loading from './components/loading/Loading.jsx';
 import Grid from './components/grid/Grid.jsx';
 import Search from './components/search/Search.jsx';
 import AdvancedSearch from './components/advancedSearch/AdvancedSearch.jsx';
+import SearchBox from './components/searchBox/SearchBox.jsx';
 import './App.css'
 
 function App() {
@@ -19,13 +20,19 @@ function App() {
   const [scrapeData, setScrapeData] = useState({});
   const [name, setName] = useState("home");
   const [isScraping, setIsScraping] = useState(true);
+  const [isSearching, setIsSearching] = useState(false);
   const [searchToggle, setSearchToggle] = useState(false);
   const [searchClass, setSearchClass] = useState("");
   const [bookmark, setBookmark] = useState(initialBookmarks);
   
   useEffect(() => {
     async function initialScrape() {
-      setIsScraping(true);
+      console.log(name);
+      if (name[0] === ":") {
+        setIsSearching(true)
+      } else {
+        setIsScraping(true);
+      }
       const res = await fetch("http://localhost:3000/", {
         method: "post",
         headers: {
@@ -38,7 +45,10 @@ function App() {
       setScrapeData({...scrapeData,...data.data,});
     }
   if ((name == "home" && !scrapeData.trending) || ( name == "movies" && !scrapeData.movies) || ( name == "tv-shows" && !scrapeData.tvshows || name[0] == ":" ))
-    initialScrape().then(()=>{setIsScraping(false)});
+    initialScrape().then(()=>{
+    setIsScraping(false);
+    setIsSearching(false);
+    });
   }, [name])
 
   const searchScrape = (query) => {
@@ -75,12 +85,12 @@ function App() {
   return (
     <>
       <Nav action={navClick} name={name} toggle={toggle}></Nav>
-      <div className={`non-nav ${searchToggle ? "down" : ""}`}>
-        {searchToggle && <Search animationClass={searchClass} searchScrape={searchScrape}></Search>}
+      <div className="non-nav">
         {isScraping && <Loading></Loading>}
-        {/*{!isScraping && name == "home" &&<AdvancedSearch searchScrape={searchScrape}></AdvancedSearch>}*/}
-        {!isScraping && name == "home" && <Home modify={modifyBookmark} data={scrapeData} ></Home>}
-        {!isScraping && name[0] == ":" && <Grid modify={modifyBookmark} items={scrapeData.search}></Grid> }
+        {!isScraping && (name == "home" || name[0] == ":") &&<AdvancedSearch searchScrape={searchScrape}></AdvancedSearch>}
+        <SearchBox modify={modifyBookmark} items={scrapeData.search} loading={isSearching} hidden={(name[0] == ":")? true : false}></SearchBox>
+        {!isScraping && name[0] == ":" && <Grid modify={modifyBookmark} dark={true} items={scrapeData.search}></Grid> }
+        {!isScraping && (name == "home" || name[0] == ":") && <Home modify={modifyBookmark} data={scrapeData} ></Home>}
         {!isScraping && name == "movies" && <Grid modify={modifyBookmark} items={scrapeData.movies}></Grid>}
         {!isScraping && name == "tv-shows" && <Grid modify={modifyBookmark} items={scrapeData.tvshows}></Grid>}
         {name == "bookmarks" && <Grid modify={modifyBookmark} items={bookmark}></Grid>} 
